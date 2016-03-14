@@ -8,7 +8,9 @@ public final class Constants {
 
     public static final String AUTHORIZE_URL = INSTAGRAM_OAUTH_URL_BASE + "/authorize/?client_id=%s&redirect_uri=%s&response_type=code";
 
-    public static final String SCOPED_AUTHORIZE_URL = AUTHORIZE_URL    + "&scope=%s";
+    public static final String SCOPED_AUTHORIZE_URL_PARAM = "&scope=%s";
+    
+    public static final String STATE_AUTHORIZE_URL_PARAM = "&state=%s";
 
     private Constants() {}
 }

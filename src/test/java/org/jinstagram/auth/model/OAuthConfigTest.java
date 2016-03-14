@@ -53,8 +53,9 @@ public class OAuthConfigTest {
 		String secret = "";
 		String callback = "";
 		String scope = "";
+		String state = "";
 
-		OAuthConfig result = new OAuthConfig(key, secret, callback, scope);
+		OAuthConfig result = new OAuthConfig(key, secret, callback, scope, state);
 
 		// add additional test code here
 		assertNotNull(result);
@@ -64,6 +65,7 @@ public class OAuthConfigTest {
 		assertEquals("", result.getApiSecret());
 		assertEquals("", result.getApiKey());
 		assertEquals(true, result.hasScope());
+		assertEquals("", result.getState());
 	}
 
 	/**

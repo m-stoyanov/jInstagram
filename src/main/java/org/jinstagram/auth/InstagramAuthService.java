@@ -18,6 +18,8 @@ public class InstagramAuthService {
 	private String display;
 
 	private String scope;
+	
+	private String state;
 
 	private Proxy requestProxy;
 
@@ -102,6 +104,20 @@ public class InstagramAuthService {
 	}
 
 	/**
+	 * Configures the state parameter 
+	 * 
+	 * @param state state parameter
+	 * @return the {@link InstagramAuthService} instance for method chaining
+	 */
+	public InstagramAuthService state(String state) {
+		Preconditions.checkEmptyString(state, "Invalid State value");
+
+		this.state = state;
+
+		return this;
+	}
+	
+	/**
 	 * Configures the Display parameter ; if you want a mobile-optimized
 	 * authorization screen
 	 *
@@ -128,7 +144,7 @@ public class InstagramAuthService {
 		Preconditions.checkEmptyString(apiKey, "You must provide an api key");
 		Preconditions.checkEmptyString(apiSecret, "You must provide an api secret");
 
-		config = new OAuthConfig(apiKey, apiSecret, callback, scope, display);
+		config = new OAuthConfig(apiKey, apiSecret, callback, scope, display, state);
 
 		if (this.requestProxy != null) {
 			config.setRequestProxy(this.requestProxy);

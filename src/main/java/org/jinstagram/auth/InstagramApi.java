@@ -14,9 +14,6 @@ import org.jinstagram.utils.Preconditions;
 
 import static org.jinstagram.http.URLUtils.formURLEncode;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class InstagramApi {
 	public String getAccessTokenEndpoint() {
 		return Constants.ACCESS_TOKEN_ENDPOINT;
@@ -30,13 +27,16 @@ public class InstagramApi {
 		Preconditions.checkValidUrl(config.getCallback(),
 				"Must provide a valid url as callback. Instagram does not support OOB");
 
-		// Append scope if present
+		String authorizationUrl = String.format(Constants.AUTHORIZE_URL, config.getApiKey(), formURLEncode(config.getCallback())); 
+		// Append scope and/or state if present
 		if (config.hasScope()) {
-			return String.format(Constants.SCOPED_AUTHORIZE_URL, config.getApiKey(),
-					formURLEncode(config.getCallback()), formURLEncode(config.getScope()));
-		} else {
-			return String.format(Constants.AUTHORIZE_URL, config.getApiKey(), formURLEncode(config.getCallback()));
-		}
+			authorizationUrl = authorizationUrl + String.format(Constants.SCOPED_AUTHORIZE_URL_PARAM, formURLEncode(config.getScope()));		
+		} 
+		if(config.hasState()){
+			authorizationUrl = authorizationUrl + String.format(Constants.STATE_AUTHORIZE_URL_PARAM, formURLEncode(config.getState()));
+		}			
+		
+		return authorizationUrl;
 	}
 
 	public AccessTokenExtractor getAccessTokenExtractor() {
