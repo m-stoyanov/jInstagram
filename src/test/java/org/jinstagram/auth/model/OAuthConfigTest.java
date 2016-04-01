@@ -80,14 +80,14 @@ public class OAuthConfigTest {
 		String secret = "";
 		String callback = null;
 		String scope = "";
-		String display = "";
+		String state = "";
 
-		OAuthConfig result = new OAuthConfig(key, secret, callback, scope, display);
+		OAuthConfig result = new OAuthConfig(key, secret, callback, scope, state);
 
 		// add additional test code here
 		assertNotNull(result);
 		assertEquals("", result.getScope());
-		assertEquals("", result.getDisplay());
+		assertEquals(null, result.getDisplay());
 		assertEquals("oob", result.getCallback());
 		assertEquals("", result.getApiSecret());
 		assertEquals("", result.getApiKey());
